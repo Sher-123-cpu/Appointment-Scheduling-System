@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #cddff0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+}
+
+.container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.system-name {
+    font-style: italic;
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+   
+
+}
+
+.create-account-form {
+    width: 400px;
+    background-color: #cddff0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-account-form form {
+    display: flex; 
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+select,
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.dob-gender {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.dob,
+.gender {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.email-phone {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.email,
+.phone {
+    flex: 1;
+    margin-right: 10px;
+}
+
+
+.passwords {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.password,
+.confirm-password {
+    flex: 1;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.small-text {
+    font-size: 0.6em; /* Adjust the font size as needed */
+}
+
+button:hover {
+    background-color: #2196F3;
+}

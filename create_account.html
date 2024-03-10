@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="styles.create.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="system-name">Appointment Scheduling System</h1>
+        <div class="create-account-form">
+            <form action="register.php" method="post">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last_name" required>
+                </div>
+                <div class="form-group">
+                    <div class="dob-gender">
+                        <div class="dob">
+                            <label for="dob">Date of Birth (D.O.B)</label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+                        <div class="gender">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="email-phone">
+                        <div class="email">
+                           <label for="email">Email</label>
+                           <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="phone">
+                           <label for="phone">Phone Number</label>
+                           <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="passwords">
+                        <div class="password">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="confirm-password">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" name="confirm_password" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="promotional-offers">
+                        <span class="small-text">I consent to receive marketing communications, including but not limited to newsletters, promotional offers, product updates, event invitations, and other information from your company and its affiliates. I understand that I can withdraw my consent at any time by updating my preferences or contacting you.</span>
+                    </label>
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
