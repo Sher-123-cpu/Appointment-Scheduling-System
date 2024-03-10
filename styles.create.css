@@ -104,7 +104,7 @@ button {
     cursor: pointer;
 }
 .small-text {
-    font-size: 0.6em; /* Adjust the font size as needed */
+    font-size: 0.6em; /* Adjust the font size if the 0.6 is too small */
 }
 
 button:hover {
