@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Patient Appointments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cddff0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #cddff0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        
+
+        .patient-details {
+            margin-bottom: 20px;
+        }
+
+        .patient-details label {
+            font-weight: bold;
+        }
+
+        .patient-details{
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .buttons button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            background-color: #0b7dda;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .aside-section {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #0b7dda;
+            padding: 10px 15px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .aside-section a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin - View Patient Appointments</h1>
+
+        <main class="main">
+            <h2>Manage Patient Appointment </h2>
+            <div class="patient-details">
+                <div>
+                    <h4>Patient Name</h4>
+                    <p>John Doe</p>
+                </div>
+                <div>
+                    <h4>Email</h4>
+                    <p>john.doe@example.com</p>
+                </div>
+                <div>
+                    <h4>Phone Number</h4>
+                    <p>123-456-7890</p>
+                </div>
+                <div>
+                    <h4>Doctor Assigned</h4>
+                    <p>Dr. Jane Smith</p>
+                </div>
+            </div>
+
+        <div class="buttons">
+            <button onclick="addAppointment()">Add Appointment</button>
+            <button onclick="modifyAppointment()">Modify Appointment</button>
+            <button onclick="cancelAppointment()">Cancel Appointment</button>
+        </div>
+
+    </div>
+
+    <div class="aside-section">
+        <a href="dashboard.html">Home</a>
+        <a href="logout.html">Logout</a>
+    </div>
+
+    <script>
+        function addAppointment() {
+            alert('Appointment added.');
+        }
+
+        function modifyAppointment() {
+            alert('Appointment modified.');
+        }
+
+        function cancelAppointment() {
+            alert('Appointment canceled.');
+        }
+
+    </script>
+</body>
+</html>

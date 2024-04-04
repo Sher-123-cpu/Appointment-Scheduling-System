@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Appointment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cddff0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .system-name {
+            font-style: italic;
+            font-size: 20px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto; /* Center the container horizontally */
+            padding: 20px;
+            text-align: center; /* Center the content horizontally */
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #0b7dda;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0b7dda;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="system-name">Appointment Scheduling System</h1>
+        <h2>Admin Appointment Page</h2>
+        <p>This is the appointment page for an administrator.</p>
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Doctor</th>
+                    <th>Patient</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-03-15</td>
+                    <td>10:00 AM</td>
+                    <td>Dr. Smith</td>
+                    <td>John Doe</td>
+                    <td>Confirmed</td>
+                    <td class="view"><button>View</button></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

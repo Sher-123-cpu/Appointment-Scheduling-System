@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #cddff0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150vh;
+    }
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .system-name {
+        font-size: 18px;
+        font-style: italic;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+       
+    }
+    
+    .appointments {
+    
+        background-color: #cddff0;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);;
+    }
+    
+    h2 {
+        margin-top: 0;
+        text-align: center;
+    }
+    
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    ul li {
+        margin-bottom: 10px;
+    }
+    
+    .action-buttons {
+        margin-top: 20px;
+    }
+    
+    .action-buttons button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .action-buttons button:hover {
+        background-color: #2196F3;
+    }
+</style>    
+</head>
+<body>
+    <div class="container">
+        <h1 class="system-name">Appointment Scheduling System</h1>
+        <div class="appointments">
+            <h1>Appointments</h1>
+            <h3>Upcoming Appointments</h3>
+            <ul class="upcoming-appointments">
+                <li>General Appointment - May 10 2024, 11:00 A.M.</li>
+                <li>Surgery Consultation  - June 01,2024 9:00 A.M.</li>
+                
+                <!-- Add more upcoming appointments here -->
+            </ul>
+
+            <h3>Past Appointments</h3>
+            <ul class="past-appointments">
+                <li>Medical - December 05,2023, 10:00 a.m.</li>
+                <li>Dental  - December 06,2023, 11:00 a.m. </li>
+                
+            </ul>
+
+            <div class="action-buttons">
+                <button class="book-appointment">Book Appointment</button>
+                <button class="reschedule-appointment">Reschedule Appointment</button>
+                <button class="cancel-appointment">Cancel Appointment</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
