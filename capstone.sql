@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS Appointment (
     AppointmentType VARCHAR(255),
     AppointmentStatus VARCHAR(50),
     UserID VARCHAR(10),
+    Provider VARCHAR(255),
     FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASCADE
 );
 
@@ -52,3 +53,13 @@ CREATE TABLE IF NOT EXISTS Preference (
     TimeOfDay VARCHAR(50),
     FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS Feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    AppointmentID VARCHAR(10),
+    feedback TEXT,
+    FOREIGN KEY (AppointmentID) REFERENCES Appointment(AppointmentID)
+);
+
+
+

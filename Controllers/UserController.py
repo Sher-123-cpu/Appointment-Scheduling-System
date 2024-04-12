@@ -109,3 +109,60 @@ class UserController:
             return full_name
         else:
             return None
+        
+    def get_user_details(user_id):
+        try:
+            conn = DbController.get_connection()  # Get a database connection
+            cursor = conn.cursor(dictionary=True)
+            
+            # Execute SQL query to fetch user details
+            cursor.execute("SELECT Email, PhoneNumber FROM Patient WHERE UserID = %s", (user_id,))
+            
+            # Fetch the user details
+            user_details = cursor.fetchone()
+            
+            return user_details
+        
+        except Exception as e:
+            print("Error fetching user details:", e)
+            return None
+        
+        finally:
+            if conn:
+                conn.close()
+    
+    @staticmethod
+    def get_patient_name(user_id):
+        try:
+            conn = DbController.get_connection()  # Get a database connection
+            cursor = conn.cursor()
+            
+           
+            cursor.execute("SELECT CONCAT(FirstName, ' ', LastName) AS patientname FROM User WHERE UserID = %s", (user_id,))
+            
+            
+            patient_name = cursor.fetchone()[0] 
+            
+            return patient_name
+        
+        except Exception as e:
+            print("Error fetching patient's full name:", e)
+            return None
+        
+        finally:
+            if conn:
+                conn.close()  
+                
+    def get_id(username, password):
+        conn = DbController.get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT UserID FROM User WHERE Username = %s AND UserPassword = %s", (username, password))
+        user_data = cursor.fetchone()
+        
+        conn.close()
+        
+        if user_data:
+            return user_data[0] 
+        else:
+            return None

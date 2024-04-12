@@ -13,14 +13,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 150vh;
+    
     }
+
+    
     
     .container {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        justify-items: center;
         padding: 20px;
+        padding-top: 200px;
     }
     
     .system-name {
@@ -37,7 +40,8 @@
         background-color: #cddff0;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+     
     }
     
     h2 {
@@ -57,6 +61,10 @@
     .action-buttons {
         margin-top: 20px;
     }
+
+    .each {
+        padding-bottom: 10px;
+    }
     
     .action-buttons button {
         padding: 10px 20px;
@@ -71,34 +79,54 @@
     .action-buttons button:hover {
         background-color: #2196F3;
     }
-</style>    
+
+    .button {
+            padding: 8px 16px;
+            background-color: #0b7dda;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 7px;
+        }
+
+    .button:hover {
+            background-color: #0056b3;
+        }
+</style>
 </head>
 <body>
     <div class="container">
         <h1 class="system-name">Appointment Scheduling System</h1>
         <div class="appointments">
             <h1>Appointments</h1>
+            {{message}}
             <h3>Upcoming Appointments</h3>
             <ul class="upcoming-appointments">
-                <li>General Appointment - May 10 2024, 11:00 A.M.</li>
-                <li>Surgery Consultation  - June 01,2024 9:00 A.M.</li>
-                
-                <!-- Add more upcoming appointments here -->
+                {{nextmessage}}
+                {% for appointment in upcoming_appointments %}
+                <li class="each">
+                    {{ appointment['AppointmentDate'] }} - {{ appointment['AppointmentTime'] }} - {{ appointment['AppointmentLocation'] }} - {{ appointment['Doctor'] }} 
+                    <a class="button" href="/cancel-appointment/{{ appointment['AppointmentID'] }}">Cancel</a>
+                    <a class="button" href="/patient-list/{{ appointment['AppointmentID'] }}">Reschedule</a>
+                </li>
+                {% endfor %}
             </ul>
-
+            
             <h3>Past Appointments</h3>
             <ul class="past-appointments">
-                <li>Medical - December 05,2023, 10:00 a.m.</li>
-                <li>Dental  - December 06,2023, 11:00 a.m. </li>
+                {{othermessage}}
+                {% for appointment in past_appointments %}
+                    <li class = "each">{{ appointment['AppointmentDate'] }} - {{ appointment['AppointmentTime'] }} - {{ appointment['AppointmentLocation'] }} - {{ appointment['Doctor'] }} <a  class = button href="/provide-feedback/{{ appointment['AppointmentID'] }}">Feedback</a></li>
+                {% endfor %}
                 
             </ul>
-
-            <div class="action-buttons">
-                <button class="book-appointment">Book Appointment</button>
-                <button class="reschedule-appointment">Reschedule Appointment</button>
-                <button class="cancel-appointment">Cancel Appointment</button>
-            </div>
         </div>
+        <div class="action-buttons">
+            <button class="book-appointment">Book Appointment</button>
+        </div>
+   
     </div>
 </body>
 </html>

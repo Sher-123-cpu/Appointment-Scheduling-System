@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Appointment Page</title>
+    <title>Select New Appointment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,7 +58,7 @@
             background-color: #0b7dda;
             color: white;
         }
-        .view-button {
+        .resc-button {
             background-color: #0b7dda; /* Green */
             border: none;
             color: white;
@@ -73,35 +73,19 @@
         }
 
         /* Hover effect for the button */
-        .view-button:hover {
+        .resc-button:hover {
             background-color: #095898; /* Darker green */
         }
 
-        .add-appointment-button {
-            background-color: #15da0b;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;  
-            margin-left: 600px;
-            margin-bottom: 60px;
-        }
-
-        .add-appointment-button:hover {
-            background-color: #095898;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="system-name">Appointment Scheduling System</h1>
-        <h2>Admin Appointment Page</h2>
-        <p>This is the appointment page for an administrator.</p>
+        <h2>Select New Appointment</h2>
+        <p>Choose your new appoinment time below.</p>
         <p>{{message}}</p>
       
-        <a href="/add-appointment" class="add-appointment-button">Add Appointment</a>
 
         <!-- Table -->
         <table>
@@ -110,8 +94,7 @@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Location</th>
-                    <th>User ID</th>
-                    <th>Status</th>
+                    <th>Doctor</th>
                     <th>Action</th> 
                 </tr>
             </thead>
@@ -122,12 +105,12 @@
                     <td>{{ appointment['AppointmentDate'] }}</td>
                     <td>{{ appointment['AppointmentTime'] }}</td>
                     <td>{{ appointment['AppointmentLocation'] }}</td>
-                    <td>{{ appointment['UserID'] }}</td>
-                    <td>{{ appointment['AppointmentStatus'] }}</td>
+                    <td>{{ appointment['Provider'] }}</td>
                     <td>
-                        <form action="/view-appointment" method="post"> <!-- Change action as needed -->
+                        <form action="/reschedule" method="post"> 
                             <input type="hidden" name="appointment_id" value="{{ appointment['AppointmentID'] }}">
-                            <button class="view-button" type="submit">View</button>
+                            <input type="hidden" name="old_appointment" value="{{ appointment__id }}">
+                            <button class="resc-button" type="submit">Select</button>
                         </form>
                     </td>
                 </tr>

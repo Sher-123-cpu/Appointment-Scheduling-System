@@ -5,83 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - View Patient Appointments</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #cddff0;
-            margin: 0;
-            padding: 0;
-        }
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #cddff0;
+    margin: 0;
+    padding: 0;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #cddff0;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; /* Changed background color to white for better readability */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        
+.patient-details {
+    margin-bottom: 20px;
+    padding: 15px; /* Added padding for better spacing */
+}
 
-        .patient-details {
-            margin-bottom: 20px;
-        }
+.patient-details label {
+    font-weight: bold;
+}
 
-        .patient-details label {
-            font-weight: bold;
-        }
+.buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .patient-details{
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+.buttons form,
+.buttons button {
+    display: inline-block; /* Display form and buttons inline */
+    vertical-align: middle; /* Align elements vertically */
+    margin: 0 10px; /* Adjust margin between elements */
+}
 
-        .buttons {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.buttons button {
+    padding: 10px 20px;
+    background-color: #0b7dda;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        .buttons button {
-            margin: 0 5px;
-            padding: 10px 20px;
-            background-color: #0b7dda;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+.buttons button:hover {
+    background-color: #0056b3;
+}
+.aside-section {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #0b7dda;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-        .buttons button:hover {
-            background-color: #0056b3;
-        }
+.aside-section a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+    display: inline-block; /* Changed display to inline-block for proper alignment */
+    margin-top: 5px; /* Added margin-top for better spacing */
+}
 
-        .aside-section {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #0b7dda;
-            padding: 10px 15px;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .aside-section a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 10px;
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -93,48 +89,50 @@
             <div class="patient-details">
                 <div>
                     <h4>Patient Name</h4>
-                    <p>John Doe</p>
+                    <p>{{patientname}}</p>
                 </div>
                 <div>
                     <h4>Email</h4>
-                    <p>john.doe@example.com</p>
+                    <p>{{ user_details['Email'] }}</p>
                 </div>
                 <div>
                     <h4>Phone Number</h4>
-                    <p>123-456-7890</p>
+                    <p>{{ user_details['PhoneNumber'] }}</p>
                 </div>
                 <div>
-                    <h4>Doctor Assigned</h4>
-                    <p>Dr. Jane Smith</p>
+                    <h4>Appointment Date</h4>
+                    <p>{{ appointment_details['AppointmentDate'] }}</p>
+                </div>
+                <div>
+                    <h4>Appointment Location</h4>
+                    <p>{{ appointment_details['AppointmentLocation'] }}</p>
+                </div>
+                <div>
+                    <h4>Appointment Status</h4>
+                    <p>{{ appointment_details['AppointmentStatus'] }}</p>
+                </div>
+                <div>
+                    <h4>Assigned Doctor</h4>
+                    <p>{{ appointment_details['Provider'] }}</p>
                 </div>
             </div>
 
-        <div class="buttons">
-            <button onclick="addAppointment()">Add Appointment</button>
-            <button onclick="modifyAppointment()">Modify Appointment</button>
-            <button onclick="cancelAppointment()">Cancel Appointment</button>
+            <div class="buttons">
+                <form action="/modify-appointment/{{ appointment_id }}" method="get">
+                    <button type="submit">Modify Appointment</button>
+                </form>
+                <form action="" method="post">
+                    <input type="hidden" name="action" value="cancel">
+                    <button type="submit">Delete Appointment</button>
+                </form>
+            </div>
+        </main>
+
+        <div class="aside-section">
+            <a href="/admin-main">Home</a>
+            <a href="/logout">Logout</a>
+            <a href="/admin-appointment">Back</a>
         </div>
-
     </div>
-
-    <div class="aside-section">
-        <a href="dashboard.html">Home</a>
-        <a href="logout.html">Logout</a>
-    </div>
-
-    <script>
-        function addAppointment() {
-            alert('Appointment added.');
-        }
-
-        function modifyAppointment() {
-            alert('Appointment modified.');
-        }
-
-        function cancelAppointment() {
-            alert('Appointment canceled.');
-        }
-
-    </script>
 </body>
 </html>
