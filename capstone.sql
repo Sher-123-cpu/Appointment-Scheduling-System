@@ -48,9 +48,13 @@ CREATE TABLE IF NOT EXISTS Preference (
     UserID VARCHAR(10),
     PreferenceID VARCHAR(10) PRIMARY KEY,
     Type VARCHAR(255),
+    type_rank int,
     Provider VARCHAR(255),
+    provider_rank int,
     Location VARCHAR(255),
+    location_rank int,
     TimeOfDay VARCHAR(50),
+    time_rank int,
     FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASCADE
 );
 

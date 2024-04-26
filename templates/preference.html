@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Preferences</title>
-</head>
-<body>
-    <style>   
-
-body {
+    <title>Preferences</title>
+    <style>
+        body {
             font-family: Arial, sans-serif;
             background-color: #e6e5e5;
             margin: 0;
@@ -18,71 +15,71 @@ body {
             align-items: center;
             height: 100vh;
         }
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
 
-.system-name {
-    font-style: italic;
-    font-size: 20px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-.preferences-form {
-    width: 400px;
-    background-color: #cddff0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.preferences-form form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    font-weight: bold;
-}
-
-select,
-button {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px;
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0b7dda;
-}
-
-.err
-        {
-            color:red ;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
+        .system-name {
+            font-style: italic;
+            font-size: 20px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
 
-        </style>
+        .preferences-form {
+            width: 400px;
+            background-color: #cddff0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .preferences-form form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0b7dda;
+        }
+
+        .err {
+            color: red;
+        }
+    </style>
+</head>
+<body>
     <div class="container">
         <h1 class="system-name">Appointment Scheduling System</h1>
         <div class="preferences-form">
@@ -98,6 +95,15 @@ button:hover {
                         <option value="Dr. Johnson">Dr. Johnson</option>
                         <option value="Dr. Williams">Dr. Williams</option>
                     </select>
+                    <label for="doctor-rank">Rank (0-5):</label>
+                    <select id="doctor-rank" name="doctor-rank">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -107,6 +113,15 @@ button:hover {
                         <option value="Midday">Midday</option>
                         <option value="Afternoon">Afternoon</option>
                         <option value="Evening">Evening</option>
+                    </select>
+                    <label for="time-rank">Rank (0-5):</label>
+                    <select id="time-rank" name="time-rank">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
 
@@ -118,8 +133,17 @@ button:hover {
                         <option value="Center C">Center C</option>
                         <option value="Andrews Memorial">Andrews Memorial Hospital</option>
                     </select>
+                    <label for="location-rank">Rank (0-5):</label>
+                    <select id="location-rank" name="location-rank">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="preference-type">Select Preference Type:</label>
                     <select id="preference-type" name="preference-type">
@@ -127,11 +151,20 @@ button:hover {
                         <option value="Video Call">Video Call</option>
                         <option value="Phone Call">Phone Call</option>
                     </select>
+                    <label for="type-rank">Rank (0-5):</label>
+                    <select id="type-rank" name="type-rank">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                 </div>
 
                 <button type="submit">Submit Preferences</button>
             </form>
-            <p class = "err">{{ error_message }}</p>
+            <p class="err">{{ error_message }}</p>
         </div>
     </div>
 </body>
