@@ -12,28 +12,31 @@
             background-image: url("{{ url_for('static', filename='logo.png') }}");
             margin: 0;
         }
+        a {
+            text-decoration:none;
+        }
 
         .container {
-    max-width: 1000px; /* Adjust the max-width as needed */
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    white-space: nowrap; /* Prevent sections from wrapping to the next line */
-    overflow-x: auto; /* Enable horizontal scrolling if sections exceed container width */
-}
+            max-width: 1000px; /* Adjust the max-width as needed */
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            white-space: nowrap; /* Prevent sections from wrapping to the next line */
+            overflow-x: auto; /* Enable horizontal scrolling if sections exceed container width */
+        }
 
-.dashboard-section {
-    display: inline-block;
-    width: 200px; /* Set a fixed width for the sections */
-    height: 200px; /* Set a fixed height for the sections */
-    margin-right: 20px; /* Adjust margin as needed */
-    background-color: #cddff0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    vertical-align: top;
-}
+        .dashboard-section {
+            display: inline-block;
+            width: 200px; /* Set a fixed width for the sections */
+            height: 200px; /* Set a fixed height for the sections */
+            margin-right: 20px; /* Adjust margin as needed */
+            background-color: #cddff0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            vertical-align: top;
+        }
 
 
         /* Clearfix for footer */
@@ -99,105 +102,3 @@
    
 </body>
 </html>
-<!--
-<!DOCTYPE html> 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0b7dda;
-            margin: 0;
-        }
-
-        .container {
-    max-width: 1000px; /* Adjust the max-width as needed */
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    white-space: nowrap; /* Prevent sections from wrapping to the next line */
-    overflow-x: auto; /* Enable horizontal scrolling if sections exceed container width */
-}
-
-.dashboard-section {
-    display: inline-block;
-    width: 200px; /* Set a fixed width for the sections */
-    height: 200px; /* Set a fixed height for the sections */
-    margin-right: 20px; /* Adjust margin as needed */
-    background-color: #cddff0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    vertical-align: top;
-}
-
-
-        /* Clearfix for footer */
-        footer::after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        .logout-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #cddff0; /* Adjust color as needed */
-            color: #060505;
-            text-decoration: none;
-            border-radius: 3px;
-            transition: background-color 0.3s ease;
-        }
-
-        .logout-button:hover {
-            background-color: #cddff0; /* Adjust hover color as needed */
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1 class="system-name">Appointment Scheduling System</h1>
-            <h2>Welcome to the Admin Panel {{username}}</h2>
-            <p>This is the main page of the admin panel. You can navigate to different sections from here.</p>
-        </header>
-
-        <main>
-            <section class="dashboard-section" id="appointments">
-                <a href='/admin-appointment' class="appointment-link">
-                    <h2>Appointments</h2> 
-               </a>
-            </section> -->
- <!--
-            <section class="dashboard-section" id="patients">
-                <a href="manage_users.html" class="manage_users"></a>
-                <h2>Manage Users</h2>
-               
-            </section> -->
-<!--
-            <section class="dashboard-section" id="reports">
-                <a href="reports.html" class="reports-link"></a>
-                <h2>Reports</h2>
-            </section>
-
-            <section class="dashboard-section" id="settings">
-                <a href="settings.html" class="settings"></a>
-                <h2>Settings</h2>
-                </section>
-        </main>
-        <a href="/logout" class="logout-button">Logout</a>
-
-
-        <footer>
-            <p>&copy; 2024 Appointment Scheduling System. All rights reserved.</p>
-        </footer>
-    </div>
-
-   
-</body>
-</html> 
