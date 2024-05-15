@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: center;
+            height: 100vh;
+            color: brown;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color: black;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;}
+
+            tr{
+            background-color: #ebf7f7;
+        }
+
+        th {
+            background-color: black;
+            color: white;
+        }
+
+        tr:hover{
+            background-color: #c0cdcd;
+           
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Show Report</h1>
+    <h2>Report Type: Provider Count</h2>
+    <p>Report Date: {{ report_date }}</p>
+    <p>Generated At: {{ generated_at }}</p>
+    <p>Report ID: {{ report_id }}</p>
+
+    <h2>Report Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in report_data %}
+            <tr>
+                <td>{{ entry['Provider'] }}</td>
+                <td>{{ entry['Count'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

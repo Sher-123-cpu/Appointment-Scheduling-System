@@ -4,168 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preferences</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e6e5e5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    <!-- Include Font Awesome stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #e9eded;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
 
-        .system-name {
-            font-style: italic;
-            font-size: 20px;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
+    .system-name {
+        font-family: 'Roboto', sans-serif; /* Example font */
+        font-size: 24px;
+        color: #333; /* Example color */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Example text shadow */
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 20px; /* Add some space below the system name */
+    }
 
-        .preferences-form {
-            width: 400px;
-            background-color: #cddff0;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
+    .preferences-form {
+        width: 600px;
+        background-color: #0b7dda;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .preferences-form form {
-            display: flex;
-            flex-direction: column;
-        }
+    .preferences-form form select[id$="_rank"],
+    .preferences-form form label[for$="_rank"] {
+        width: 15%; /* Adjust the width as needed */
+        font-size: 14px; /* Adjust the font size as needed */
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .preferences-form form {
+        margin-top: 20px; /* Adjust margin top */
+        display: flex;
+        flex-direction: column;
+    }
 
-        .form-group label {
-            font-weight: bold;
-        }
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-        select,
-        button {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
+    .form-group label {
+        font-weight: bold;
+    }
 
-        button {
-            padding: 10px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    select,
+    button {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
 
-        button:hover {
-            background-color: #0b7dda;
-        }
+    button {
+        padding: 10px;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-        .err {
-            color: red;
-        }
-    </style>
+    button:hover {
+        background-color: #0b7dda;
+    }
+
+    .err {
+        color: red;
+    }
+    
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="system-name">Appointment Scheduling System</h1>
-        <div class="preferences-form">
-            <form action="/preferences" method="post">
-                <h2>Appointment Preferences</h2>
-                <div class="form-group">
-                    <input type="hidden" name="user_id" value="{{ user_id }}">
-                    <label for="doctor">Please select your preferred Doctor:</label>
-                    <select id="doctor" name="doctor">
-                        <option value="Dr. Marcs">Dr. Marcs</option>
-                        <option value="Dr. Jacobs">Dr. Jacobs</option>
-                        <option value="Dr. Smith">Dr. Smith</option>
-                        <option value="Dr. Johnson">Dr. Johnson</option>
-                        <option value="Dr. Williams">Dr. Williams</option>
-                    </select>
-                    <label for="doctor-rank">Rank (0-5):</label>
-                    <select id="doctor-rank" name="doctor-rank">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
+<div class="container">
+    <h1 class="system-name"><i class="fas fa-capsules"></i> Appointment Scheduling System</h1> <!-- Added capsule icon -->   
+    <div class="preferences-form">
+        <form action="/preferences" method="post">
+            <h2 style="text-align: center;"><i class="fas fa-capsules"></i>Appointment Preferences<i class="fas fa-capsules"></i></h2>
+            <p>The ranking ranges from 1-5; 5 being non-relevant and 1 being the most important preference.</p>
+            <div class="form-group">
+                <input type="hidden" name="user_id" value="{{ user_id }}">
+                <label for="doctor"><i class="fas fa-user-md"></i> Please select your preferred Doctor:</label>
+                <select id="doctor" name="doctor">
+                    <option value="Dr. Marcs">Dr. Marcs</option>
+                    <option value="Dr. Jacobs">Dr. Jacobs</option>
+                    <option value="Dr. Smith">Dr. Smith</option>
+                    <option value="Dr. Johnson">Dr. Johnson</option>
+                    <option value="Dr. Williams">Dr. Williams</option>
+                </select>
+                <label for="provider_rank"><i class="fas fa-star"></i> Rank (0-5):</label>
+                <select id="provider_rank" name="provider-rank">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="time">Please select your preferred time of Day:</label>
-                    <select id="time" name="time">
-                        <option value="Morning">Morning</option>
-                        <option value="Midday">Midday</option>
-                        <option value="Afternoon">Afternoon</option>
-                        <option value="Evening">Evening</option>
-                    </select>
-                    <label for="time-rank">Rank (0-5):</label>
-                    <select id="time-rank" name="time-rank">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="time"><i class="fas fa-clock"></i>Please select your preferred time of Day:</label>
+                <select id="time" name="time">
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                </select>
+                <label for="time_rank"><i class="fas fa-star"></i>Rank (0-5):</label>
+                <select id="time_rank" name="time-rank">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="location">Select Location:</label>
-                    <select id="location" name="location">
-                        <option value="Uwi Hospital ">Uwi Hospital</option>
-                        <option value="Family Care Medical Centre">Family Care Medical Center</option>
-                        <option value="Center C">Center C</option>
-                        <option value="Andrews Memorial">Andrews Memorial Hospital</option>
-                    </select>
-                    <label for="location-rank">Rank (0-5):</label>
-                    <select id="location-rank" name="location-rank">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="location"><i class="fas fa-map-marker-alt"></i>Select Location:</label>
+                <select id="location" name="location">
+                    <option value="Uwi Hospital">Uwi Hospital</option>
+                    <option value="Family Care Medical Centre">Family Care Medical Center</option>
+                    <option value="Center C">Center C</option>
+                    <option value="Andrews Memorial">Andrews Memorial Hospital</option>
+                </select>
+                <label for="location_rank"><i class="fas fa-star"></i>Rank (0-5):</label>
+                <select id="location_rank" name="location-rank">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="preference-type">Select Preference Type:</label>
-                    <select id="preference-type" name="preference-type">
-                        <option value="In-Person">In-Person</option>
-                        <option value="Video Call">Video Call</option>
-                        <option value="Phone Call">Phone Call</option>
-                    </select>
-                    <label for="type-rank">Rank (0-5):</label>
-                    <select id="type-rank" name="type-rank">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="preference-type"><i class="fas fa-home"></i>Select Preference Type:</label>
+                <select id="preference-type" name="preference-type">
+                    <option value="In-Person">In-Person</option>
+                    <option value="Video Call">Video Call</option>
+                    <option value="Phone Call">Phone Call</option>
+                </select>
+                <label for="type_rank"><i class="fas fa-star"></i>Rank (0-5):</label>
+                <select id="type_rank" name="type-rank">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
 
-                <button type="submit">Submit Preferences</button>
-            </form>
-            <p class="err">{{ error_message }}</p>
-        </div>
+            <button type="submit"><i class="fas fa-check"></i>Submit Preferences</button>
+        </form>
+        <p class="err">{{ error_message }}</p>
     </div>
+</div>
 </body>
 </html>

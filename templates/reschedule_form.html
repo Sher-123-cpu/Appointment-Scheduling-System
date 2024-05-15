@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Reschedule Appointment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #cddff0;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
+            background-size: cover;
+            background-position: center;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,31 +20,35 @@
         }
 
         .container {
-            width: 400px;
+            width: 90%;
+            max-width: 400px;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             margin-top: 0;
+            color: #333;
         }
 
         form {
             margin-top: 20px;
+            text-align: left;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
+            color: #555;
         }
 
         select {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
@@ -56,28 +63,49 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        button[type="submit"] .fas {
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            select, button[type="submit"] {
+                padding: 8px;
+                margin-bottom: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <h1>
+            <i class="fas fa-capsules"></i> Appointment Scheduling System <i class="fas fa-capsules"></i>
+        </h1>
         <h1>Reschedule Appointment</h1>
-      
         <form action="/reschedule-appointment" method="post">
-            <label for="priority">Priority Level:</label>
+            <label for="priority"><i class="fas fa-star"></i> Level:<i class="fas fa-star"></i></label>
             <select id="priority" name="priority" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="4">4 (Less urgent)</option>
+                <option value="5">5 (Not Urgent)</option>
             </select>
 
-            <label for="type">Appointment Type:</label>
+            <label for="type"><i class="fas fa-home"></i>Appointment Type:<i class="fas fa-home"></i></label>
             <select id="type" name="type" required>
                 <option value="In-Person">In-Person</option>
                 <option value="Video Call">Video Call</option>
@@ -85,9 +113,11 @@
             </select>
 
             <input type="hidden" name="appointment_id" value="{{ appointment_id }}">
-            <input type="hidden" name="old_appointment" value="{{old_appointment}}">
+            <input type="hidden" name="old_appointment" value="{{ old_appointment }}">
 
-            <button type="submit">Reschedule</button>
+            <button type="submit">
+                Reschedule <i class="fas fa-calendar-alt"></i>
+            </button>
         </form>
     </div>
 </body>

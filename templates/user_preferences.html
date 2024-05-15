@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Preferences</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        div {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        strong {
+            color: #0b7dda;
+        }
+
+        .error-message {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Preferences</h2>
+    <div>
+        <!-- Check if preferences exist -->
+        {% if preferences %}
+        <p><strong><i class="fas fa-home"></i>Appointment Type:</strong> {{ preferences['Type'] }}</p>
+        <p><strong><i class="fas fa-user-md"></i>Provider:</strong> {{ preferences['Provider'] }}</p>
+        <p><strong><i class="fas fa-home"></i>Location:</strong> {{ preferences['Location'] }}</p>
+        <p><strong><i class="fas fa-clock"></i>Time of Day:</strong> {{ preferences['TimeOfDay'] }}</p>
+        {% else %}
+        <p class="error-message">No preferences found.</p>
+        {% endif %}
+         
+        <a href="/patient-main" class="btn">Home</a>
+
+    </div>
+</body>
+</html>

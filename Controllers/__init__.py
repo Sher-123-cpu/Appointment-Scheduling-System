@@ -2,3 +2,8 @@ from .UserController import UserController
 from .DbController import DbController
 from .PrefController import PrefController 
 from .AppController import AppController
+from .ReportController import ReportController
+from .NotificationController import NotificationController
+from .RuleBased import RuleBased
+from .Triage import Triage
+from .EmailSender import EmailSender

@@ -3,13 +3,37 @@ from .DbController import DbController
 
 class AppController:
     @staticmethod
+    def retrieve_emergency_questions():
+        connection = DbController.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT question_text FROM emergency_questions")
+                questions = cursor.fetchall()
+                return questions
+        finally:
+            connection.close()
+    
+    def retrieve_appointment_questions():
+        connection = DbController.get_connection()
+        try:
+            with connection.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM appointment_questions")
+                questions = cursor.fetchall()
+                for question in questions:
+                    cursor.execute("SELECT option_option, option_text FROM appointment_options WHERE question_id = %s", (question['id'],))
+                    options = cursor.fetchall()
+                    question['options'] = [option for option in options]
+                return questions
+        finally:
+            connection.close()
+
     def get_appointments():
         try:
             conn = DbController.get_connection()  # Get a database connection
             cursor = conn.cursor(dictionary=True)
             
             # Execute SQL query to fetch appointment data
-            cursor.execute("SELECT AppointmentID, DATE(AppointmentTime) AS AppointmentDate, TIME(AppointmentTime) AS AppointmentTime, AppointmentLocation, UserID, AppointmentStatus FROM Appointment")
+            cursor.execute("SELECT AppointmentID, AppointmentTime AS AppointmentDatetime, DATE(AppointmentTime) AS AppointmentDate, TIME(AppointmentTime) AS AppointmentTime, AppointmentLocation, UserID, AppointmentStatus FROM Appointment ORDER BY Appointment.AppointmentTime")
             
             # Fetch all appointment records
             appointments = cursor.fetchall()
@@ -23,7 +47,15 @@ class AppController:
         finally:
             if conn:
                 conn.close()  # Close the database connection
-
+    def retrieve_triage2_questions():
+        connection = DbController.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT question_text FROM triage2_questions")
+                questions = cursor.fetchall()
+                return questions
+        finally:
+            connection.close()
     @staticmethod
     def get_appointments_patient():
         try:
@@ -31,7 +63,7 @@ class AppController:
             cursor = conn.cursor(dictionary=True)
             
             # Execute SQL query to fetch appointment data
-            cursor.execute("SELECT AppointmentID, DATE(AppointmentTime) AS AppointmentDate, TIME(AppointmentTime) AS AppointmentTime, AppointmentLocation, Provider FROM Appointment WHERE appointmentStatus = 'Open'")
+            cursor.execute("SELECT AppointmentID, DATE(AppointmentTime) AS AppointmentDate, TIME(AppointmentTime) AS AppointmentTime, AppointmentLocation, Provider FROM Appointment WHERE appointmentStatus = 'Open' ORDER BY Appointment.AppointmentTime")
             # Fetch all appointment records
             appointments = cursor.fetchall()
             
@@ -78,7 +110,7 @@ class AppController:
             cursor = conn.cursor(dictionary=True)
             
             # Execute SQL query to fetch appointment details
-            cursor.execute("SELECT DATE(AppointmentTime) AS AppointmentDate, AppointmentLocation, AppointmentStatus, Provider FROM Appointment WHERE AppointmentID = %s", (appointment_id,))
+            cursor.execute("SELECT DATE(AppointmentTime) AS AppointmentDate, TIME(AppointmentTime) AS AppointmentTime, AppointmentLocation, AppointmentStatus, Provider FROM Appointment WHERE AppointmentID = %s", (appointment_id,))
             
             # Fetch the appointment details
             appointment_details = cursor.fetchone()
@@ -124,7 +156,7 @@ class AppController:
             # Execute SQL query to insert the appointment into the database
             cursor.execute('''INSERT INTO Appointment (appointmentID, priorityLevel, appointmentTime, 
                               appointmentLocation, appointmentType, appointmentStatus, userID, Provider) 
-                              VALUES (%s, NULL, %s, %s, NULL, 'Open', NULL, %s)''',
+                              VALUES (%s, 0, %s, %s, NULL, 'Open', NULL, %s)''',
                            (appointment_id, f"{date} {time}", location, doctor))
 
             conn.commit()  # Commit the transaction
@@ -203,6 +235,27 @@ class AppController:
         finally:
             if conn:
                 conn.close()
+    def set_completed(appointment_id):
+        try:
+            conn = DbController.get_connection()
+            cursor = conn.cursor()
+            
+            # Update the appointment details in the database
+            cursor.execute("UPDATE Appointment SET AppointmentStatus = 'Completed' WHERE AppointmentID = %s", (appointment_id,))
+            
+            # Commit the transaction
+            conn.commit()
+            
+            return True  # Return True if the appointment is successfully modified
+            
+        except Exception as e:
+            print("Error modifying appointment:", e)
+            conn.rollback()  # Rollback the transaction in case of an error
+            return False  # Return False if there is an error modifying the appointment
+            
+        finally:
+            if conn:
+                conn.close()
     
     @staticmethod
     def get_past_appointments(user_id):
@@ -241,6 +294,50 @@ class AppController:
         except Exception as e:
             print("Error fetching upcoming appointments:", e)
             return []
+        
+    @staticmethod
+    def get_upcoming_appointments_reminder():
+        try:
+            conn = DbController.get_connection()  # Get a database connection
+            cursor = conn.cursor(dictionary=True)
+
+            # Execute SQL query to fetch upcoming appointments
+            current_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            query = "SELECT AppointmentID, UserID,  AppointmentTime as AppointmentDatetime, DATE( AppointmentTime) AS AppointmentDate, TIME(AppointmentTime) AS AppointmentTime, AppointmentLocation, Provider, PriorityLevel FROM Appointment WHERE AppointmentTime >= %s AND AppointmentStatus = 'Scheduled'"
+            cursor.execute(query, (current_datetime,))
+            
+            # Fetch the upcoming appointments
+            upcoming_appointments = cursor.fetchall()
+
+            return upcoming_appointments
+        except Exception as e:
+            print("Error fetching upcoming appointments:", e)
+            return []
+        
+    @staticmethod
+    def getLocationEmail(locationname):
+        connection = DbController.get_connection()  # Get a database connection
+         
+        cursor = connection.cursor()
+        # Prepare the SQL query
+        query = "SELECT LocationEmail FROM Location WHERE LocationName = %s"
+
+        # Execute the query with the location name as parameter
+        cursor.execute(query, (locationname,))
+
+        # Fetch the result
+        result = cursor.fetchone()
+
+        # Close cursor and connection
+        cursor.close()
+        connection.close()
+
+        # Return the email address if found, otherwise return None
+        if result:
+            return result[0]
+        else:
+            return None
+    
     @staticmethod
     def submitfeedback(appointment_id, feedback):
         try:
@@ -283,7 +380,7 @@ class AppController:
             conn = DbController.get_connection()
             cursor = conn.cursor()
             # Set priority, type, and user id to null for the old appointment
-            cursor.execute("UPDATE Appointment SET priorityLevel=NULL, appointmentType=NULL, userID=NULL, appointmentStatus=%s WHERE appointmentID=%s", (status, old_appointment))
+            cursor.execute("UPDATE Appointment SET priorityLevel=0, appointmentType=NULL, userID=NULL, appointmentStatus=%s WHERE appointmentID=%s", (status, old_appointment))
             conn.commit()
         except Exception as e:
             conn.rollback()

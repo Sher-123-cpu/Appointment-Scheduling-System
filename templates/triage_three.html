@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Equipment and Procedures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+        }
+        .system-name {
+            font-size: 24px;
+            font-style: italic;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .system-name img {
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .first-ques{
+            width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container,.form-container-new,.form-container-vitals-old,.form-container-vitals-new {
+            width: 500px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+          }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+       .btn,.new-p,.old-p {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover,.new-p:hover,.old-p:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container{
+            display: flex;
+            flex-direction: row;
+            gap:30px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="first-ques">
+        <h1 class="system-name">
+            <img src="/static/logo.jpg" alt="Logo">
+            Appointment Scheduling System
+        </h1>
+       
+        
+        <p>Is this your first time scheduling this type of appointment?</p>
+        <div class="button-container">
+            <Button class="new-p" onclick="NewForm()"> Yes </Button>
+            <Button class="old-p"  onclick="OldForm()"> No </Button>
+        </div>
+
+    </div>
+    <div class="form-container">
+        <h1>Appointment Equipment and Procedures</h1>
+        <form id="appointmentForm" class="appointmentForm">
+            {% for question in question_list %}
+            <div class="form-group">
+                <label for="question{{ loop.index }}">{{ question['question_text'] }}</label>
+                <select id="question{{ loop.index }}" name="question{{ loop.index }}">
+                    {% for option in question['options'] %}
+                    <option value="{{ option['option_option'] }}">{{ option['option_text'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+            
+        </form>
+        <button  class="btn" onclick="vitalsold()">Next</button>
+    </div>
+
+    <div class="form-container-new">
+        <h1>Appointment Equipment and Procedures</h1>
+        <form id="appointmentForm-new" class="appointmentForm-new">
+            {% for question in question_list %}
+            <div class="form-group">
+                <label for="question{{ loop.index }}">{{ question['question_text'] }}</label>
+                <select id="question{{ loop.index }}" name="question{{ loop.index }}">
+                    {% for option in question['options'] %}
+                    <option value="{{ option['option_option'] }}">{{ option['option_text'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+            
+        </form>
+        <button class="btn" onclick="vitalsnew()">Next</button>
+    </div>
+
+    <div class="form-container-vitals-old">
+        <form id="healthForm" class="form-vitals-old">
+            <h1>Health Assessment</h1>
+            <p>If are able to check any of the following please enter below.</p>
+            <div class="form-group">
+                <label for="systolicPressure">Systolic Pressure (mmHg):</label>
+                <input type="number" id="systolicPressure" name="systolicPressure" placeholder="Enter your systolic pressure">
+            </div>
+            <div class="form-group">
+                <label for="diastolicPressure">Diastolic Pressure (mmHg):</label>
+                <input type="number" id="diastolicPressure" name="diastolicPressure" placeholder="Enter your diastolic pressure">
+            </div>
+            <div class="form-group">
+                <label for="heartRate">Heart Rate (bpm):</label>
+                <input type="number" id="heartRate" name="heartRate" placeholder="Enter your heart rate">
+            </div>
+            <div class="form-group">
+                <label for="respiratoryRate">Respiratory Rate (breaths per minute):</label>
+                <input type="number" id="respiratoryRate" name="respiratoryRate" placeholder="Enter your respiratory rate">
+            </div>
+            <div class="form-group">
+                <label for="temperature">Temperature (°C):</label>
+                <input type="number" id="temperature" name="temperature" placeholder="Enter your temperature">
+            </div>
+            <div class="form-group">
+                <label for="oxygenSaturation">Oxygen Saturation (%):</label>
+                <input type="number" id="oxygenSaturation" name="oxygenSaturation" placeholder="Enter your oxygen saturation">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" placeholder="Enter your age">
+            </div>
+         
+        </form>
+        <button  class ='btn' onclick="submitold()">Submit</button>
+    </div>
+
+    <div class="form-container-vitals-new">
+    <form id="healthForm" class="form-vitals-new">
+        <h1>Health Assessment</h1>
+        <p>If are able to check any of the following please enter below.</p>
+        <div class="form-group">
+            <label for="systolicPressure">Systolic Pressure (mmHg):</label>
+            <input type="number" id="systolicPressure" name="systolicPressure" placeholder="Enter your systolic pressure" >
+        </div>
+        <div class="form-group">
+            <label for="diastolicPressure">Diastolic Pressure (mmHg):</label>
+            <input type="number" id="diastolicPressure" name="diastolicPressure" placeholder="Enter your diastolic pressure" >
+        </div>
+        <div class="form-group">
+            <label for="heartRate">Heart Rate (bpm):</label>
+            <input type="number" id="heartRate" name="heartRate" placeholder="Enter your heart rate" >
+        </div>
+        <div class="form-group">
+            <label for="respiratoryRate">Respiratory Rate (breaths per minute):</label>
+            <input type="number" id="respiratoryRate" name="respiratoryRate" placeholder="Enter your respiratory rate" >
+        </div>
+        <div class="form-group">
+            <label for="temperature">Temperature (°C):</label>
+            <input type="number" id="temperature" name="temperature" placeholder="Enter your temperature">
+        </div>
+        <div class="form-group">
+            <label for="oxygenSaturation">Oxygen Saturation (%):</label>
+            <input type="number" id="oxygenSaturation" name="oxygenSaturation" placeholder="Enter your oxygen saturation" >
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" >
+        </div>
+     
+    </form>
+    <button  class ='btn' onclick="submitnew()">Submit</button>
+</div>
+
+    <script>
+        function NewForm() {
+            const formContainer = document.querySelector('.form-container-new');
+            const Question = document.querySelector('.first-ques');
+
+            formContainer.style.display = 'block';
+            Question.style.display = 'none';
+           
+        }
+
+        function OldForm() {
+            const formContainer = document.querySelector('.form-container');
+            const Question = document.querySelector('.first-ques');
+
+            formContainer.style.display = 'block';
+            Question.style.display = 'none';
+        }
+
+        function vitalsnew() {
+    
+        const formContainernew = document.querySelector('.form-container-new');
+        const formContainervitals = document.querySelector('.form-container-vitals-new');
+      
+        formContainernew.style.display = 'none';
+        formContainervitals.style.display = 'block';
+        }
+
+        function vitalsold() {
+    
+    
+    const formContainervitals = document.querySelector('.form-container-vitals-old');
+    const formContainer = document.querySelector('.form-container');
+    
+    formContainer.style.display = 'none';
+    formContainervitals.style.display = 'block';
+    }
+
+    function submitold() {
+    const formContainer = document.querySelector('.appointmentForm');
+    const formContainerVitals = document.querySelector('.form-vitals-old');
+
+    const formData = new FormData(formContainer);
+    const vitalFormData = new FormData(formContainerVitals);
+
+    for (const [key, value] of vitalFormData.entries()) {
+        formData.append(key, value);
+    }
+
+    // Submit the form data to the approute
+    fetch('/submit-triage-three', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Form submitted successfully');
+            // Redirect or display success message
+            return response.json();
+        } else {
+            console.error('Form submission failed');
+            // Handle error
+        }
+    }) 
+    .then(data => {
+        console.log(data)
+
+        console.log(data[0]);
+
+    // Access the string part of the response
+    if (data[0] == 'triage3'){
+        window.location.href = '/patient-appointment';}
+    else{
+       
+         // Extract hospital name and appointment time from data
+        const hospitalName = data[0];
+        const appointmentTime = data[1];
+        
+        // Construct message content
+        const message = `Your condition might be serious, you have been scheduled an appointment at ${hospitalName}. Please come in at ${appointmentTime}. ${hospitalName} hospital has received a notification of your appointment and is expecting your arrival.`;
+        
+        // Clear the screen
+        document.body.innerHTML = '';
+        
+        // Create and display popup modal
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        const popupContent = document.createElement('div');
+        popupContent.className = 'popup-content';
+        const popupMessage = document.createElement('span');
+        popupMessage.id = 'popup-message';
+        popupMessage.textContent = message;
+        popupContent.appendChild(popupMessage);
+       
+
+        popup.style.position = 'fixed';
+        popup.style.width = '70%';
+        popup.style.background = '#ff0000';
+        popup.style.color = '#ffffff';
+        popup.style.padding = '20px';
+        popupContent.style.paddingBottom = '20px';
+        popup.style.borderRadius = '10px';
+        popup.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+        popup.style.display = 'block';
+        popup.style.fontSize = '25px';
+
+        const homeButton = document.createElement('a');
+        homeButton.textContent = 'Home';
+        homeButton.classList.add('btn');
+        homeButton.href = '/patient-main'; // Set the href attribute
+        
+        popup.appendChild(popupContent);
+        document.body.appendChild(popup);
+        popup.appendChild(homeButton);
+
+
+    }
+    console.log(data);
+    
+})
+    .catch(error => {
+        console.error('Error submitting form:', error);
+        // Handle error
+    });
+}
+
+function submitnew() {
+    const formContainerNew = document.querySelector('.appointmentForm-new');
+    const formContainerVitals = document.querySelector('.form-vitals-new');
+
+    
+    const vitalFormData = new FormData(formContainerVitals);
+    const formData = new FormData(formContainerNew);
+
+    for (const [key, value] of vitalFormData.entries()) {
+        formData.append(key, value);
+    }
+
+    // Submit the form data to the approute
+    fetch('/submit-triage-three', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Form submitted successfully');
+            // Redirect or display success message
+            return response.json();
+        } else {
+            console.error('Form submission failed');
+            // Handle error
+        }
+    }) 
+    .then(data => {
+        console.log(data)
+
+        console.log(data[0]);
+
+    // Access the string part of the response
+    if (data[0] == 'triage3'){
+        window.location.href = '/patient-appointment';}
+    else{
+       
+         // Extract hospital name and appointment time from data
+        const hospitalName = data[0];
+        const appointmentTime = data[1];
+        
+        // Construct message content
+        const message = `Your condition might be serious, you have been scheduled an appointment at ${hospitalName}. Please come in at ${appointmentTime}. ${hospitalName} hospital has received a notification of your appointment and is expecting your arrival.`;
+        
+        // Clear the screen
+        document.body.innerHTML = '';
+        
+        // Create and display popup modal
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        const popupContent = document.createElement('div');
+        popupContent.className = 'popup-content';
+        const popupMessage = document.createElement('span');
+        popupMessage.id = 'popup-message';
+        popupMessage.textContent = message;
+        popupContent.appendChild(popupMessage);
+       
+
+        popup.style.position = 'fixed';
+        popup.style.width = '70%';
+        popup.style.background = '#ff0000';
+        popup.style.color = '#ffffff';
+        popup.style.padding = '20px';
+        popupContent.style.paddingBottom = '20px';
+        popup.style.borderRadius = '10px';
+        popup.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+        popup.style.display = 'block';
+        popup.style.fontSize = '25px';
+
+        const homeButton = document.createElement('a');
+        homeButton.textContent = 'Home';
+        homeButton.classList.add('btn');
+        homeButton.href = '/patient-main'; // Set the href attribute
+        
+        popup.appendChild(popupContent);
+        document.body.appendChild(popup);
+        popup.appendChild(homeButton);
+
+
+    }
+    console.log(data);
+    
+})
+    .catch(error => {
+        console.error('Error submitting form:', error);
+        // Handle error
+    });
+}
+    </script>
+</body>
+</html>

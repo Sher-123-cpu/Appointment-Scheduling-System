@@ -3,6 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
+    <title>Add Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .system-name {
+            font-size: 24px;
+            font-style: italic;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .system-name img {
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 400px;
+            background-color: #cddff0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="date"],
+        input[type="time"],
+        select {
+            width: calc(100% - 10px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0e75db;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="system-name">
+        <img src="/static/logo.jpg" alt="Logo">
+        Appointment Scheduling System
+    </h1>
+    <h2><i class="fas fa-capsules"></i>Add Appointment<i class="fas fa-capsules"></i></h2>
+    <form action="/submit-appointment" method="post">
+        <label for="date"><i class="fas fa-calendar-check"></i>Date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="time"><i class="fas fa-clock"></i>Time:</label>
+        <input type="time" id="time" name="time" required><br><br>
+
+        <label for="location"><i class="fas fa-map-marker-alt"></i>Location:</label>
+        <select id="location" name="location" required>
+            <option value="Uwi Hospital ">Uwi Hospital</option>
+            <option value="Family Care Medical Centre">Family Care Medical Center</option>
+            <option value="Center C">Center C</option>
+            <option value="Andrews Memorial">Andrews Memorial Hospital</option>
+        </select><br><br>
+
+        <label for="doctor"><i class="fas fa-user-md icon"></i>Doctor:</label>
+        <select id="doctor" name="doctor" required>
+            <option value="Dr. Smith">Dr. Smith</option>
+            <option value="Dr. Johnson">Dr. Johnson</option>
+            <option value="Dr. Lee">Dr. Lee</option>
+            <option value="Dr. White">Dr. White</option>
+            <option value="Dr. Brown">Dr. Brown</option>
+        </select><br><br>
+
+        <button type="submit"><i class="fas fa-check"></i>Submit</button>
+    </form>
+</body>
+</html>
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Appointment</title>
     <style>
         body {

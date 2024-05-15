@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
     <title>Modify Appointment</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #cddff0;
-            margin: 0;
-            padding: 20px;
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='logo.png') }}");
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            margin-top: 100px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .system-name {
+            font-size: 24px;
+            font-style: italic;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .system-name img {
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 10px;
         }
 
         h1 {
@@ -63,19 +72,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>Modify Appointment</h1>
+        <h1><i class="fas fa-capsules"></i> Modify Appointment<i class="fas fa-capsules"></i></h1>
 
         <form action="/modify-appointment/{{ appointment_id}}" method="post">
             <div>
-                <label for="date">Date:</label>
+                <label for="date">Date:<i class="fas fa-calendar-check"></i></label>
                 <input type="date" id="date" name="date" value="{{ appointment_details['AppointmentDate'] }}" required>
             </div>
             <div>
-                <label for="time">Time:</label>
+                <label for="time">Time:<i class="fas fa-clock"></i></label>
                 <input type="time" id="time" name="time" value="{{ appointment_details['AppointmentTime'] }}" required>
             </div>
             <div>
-                <label for="location">Location:</label>
+                <label for="location">Location:<i class="fas fa-map-marker-alt"></i></label>
                 <select id="location" name="location">
                     <option value=" Uwi Hospital" {% if appointment_details['AppointmentLocation'] == 'Uwi Hospital' %} selected {% endif %}>Uwi Hospital</option>
                     <option value="Family Care Medical Centre" {% if appointment_details['AppointmentLocation'] == 'Family Care Medical Centre' %} selected {% endif %}>Family Care Medical Center</option>
@@ -84,7 +93,7 @@
                 </select><br><br>
             </div>
             <div>
-                <label for="doctor">Doctor:</label>
+                <label for="doctor">Doctor:<i class="fas fa-user-md"></i></label>
                 <select id="doctor" name="doctor" required>
                     <option value="Dr. Smith" {% if appointment_details['Doctor'] == 'Dr. Smith' %} selected {% endif %}>Dr. Smith</option>
                     <option value="Dr. Johnson" {% if appointment_details['Doctor'] == 'Dr. Johnson' %} selected {% endif %}>Dr. Johnson</option>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
+    <title>Emergency Triage</title>
+    <style>
+       body {
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='logo.png') }}");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+        }
+        .system-name {
+            font-size: 24px;
+            font-style: italic;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .system-name img {
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container, .form-container-new, .form-container-vitals-old, .form-container-vitals-new {
+            display: none;
+        }
+        .triage-form {
+            width: 700px;
+            background-color: #cddff0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .triage-form form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button{
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0b7dda;
+        }
+
+        .err {
+            color: red;
+        }
+
+        
+
+        .button_container{
+            display: flex;
+            flex-direction: row;
+            gap:30px;
+        }
+
+        select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fff;
+}
+    </style>
+</head>
+<body>
+    <div class="triage-2">
+        <h1 class="system-name">
+            <img src="/static/logo.jpg" alt="Logo">
+            Appointment Scheduling System
+        </h1>
+       
+        <div class="triage-form">
+            <form id="triageForm" action="/submit-triage-two" method="post">
+                <h2>Emergency Questions 2</h2>
+                <p>Select any that apply along with closest hospital and submit or go to the next page if none applies.</p>
+                
+                {% for question in question_list %}
+                <div class="form-group">
+                    <input type="checkbox" id="triage{{ loop.index }}" name="triage{{ loop.index }}" value="No">
+                    <label for="triage{{ loop.index }}">{{ question[0] }}</label>
+                </div>
+                {% endfor %}
+
+                <div class="form-group">
+                    <label for="location">Closest Location:</label>
+                    <select id="location" name="location">
+                        <option value="Uwi Hospital">Uwi Hospital (UWI Campus)</option>
+                        <option value="Center C">Center C (Hope Road)</option>
+                        <option value="Family Care Medical Centre">Family Care Medical Centre (Half Way Tree)</option>
+                        <option value="Andrews Memorial">Andrews Memorial (Down Town)</option>
+                    </select>
+                </div>
+                
+                <div class="button_container">
+                <button type="submit">Submit</button>
+                <button type="button" onclick="triageThree()">Next Page</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.value = "Yes";
+                } else {
+                    this.value = "No";
+                }
+            });
+           triage1 =   document.querySelector('.emergency-form')
+           triage2 = document.q
+        });
+
+        function triageThree() {
+            // Redirect to the triage-thre page
+            window.location.href = "/triage-three";
+        }
+    
+
+    </script>
+</body>
+</html>

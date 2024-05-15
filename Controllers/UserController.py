@@ -166,3 +166,46 @@ class UserController:
             return user_data[0] 
         else:
             return None
+    
+    def get_all_users():
+        conn = DbController.get_connection()
+
+        cursor = conn.cursor(dictionary=True)
+
+        
+        # Execute the JOIN query to get user information
+        cursor.execute("SELECT FirstName, LastName, Gender, DateOfBirth, PhoneNumber, Email FROM User JOIN Patient ON User.UserID = Patient.UserID")
+        
+        users = cursor.fetchall()
+        
+        conn.close()
+        
+        return users
+        
+    def get_user(user_id):
+        conn = DbController.get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT * FROM User WHERE UserID = %s", (user_id,))
+        user_data = cursor.fetchone()
+        
+        conn.close()
+        
+        if user_data:
+            return user_data
+        else:
+            return None
+        
+    def get_patient(user_id):
+        conn = DbController.get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT * FROM Patient WHERE UserID = %s", (user_id,))
+        patient_data = cursor.fetchone()
+        
+        conn.close()
+        
+        if patient_data:
+            return patient_data
+        else:
+            return None

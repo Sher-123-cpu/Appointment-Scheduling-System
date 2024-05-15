@@ -3,38 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
     <title>Appointments</title>
     <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #cddff0;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    
-    }
+        background-image: url("{{ url_for('static', filename='logo.png') }}");
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+        }
 
-    
-    
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-items: center;
-        padding: 20px;
-        padding-top: 200px;
-    }
-    
-    .system-name {
-        font-size: 18px;
-        font-style: italic;
-        position: absolute;
-        top: 10px;
-        left: 10px;
+        .system-name {
+            font-size: 24px;
+            font-style: italic;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .system-name img {
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .container {
+            max-width: 850px;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
        
-    }
-    
     .appointments {
     
         background-color: #cddff0;
@@ -94,13 +99,29 @@
     .button:hover {
             background-color: #0056b3;
         }
+
+        .action-buttons button, .action-buttons .button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .action-buttons button:hover,.action-buttons .button:hover {
+        background-color: #2196F3;
+    }
 </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="system-name">Appointment Scheduling System</h1>
+        <h1 class="system-name"><img src="/static/logo.jpg" alt="Logo">
+            <i class="fas fa-capsules"></i>Appointment Scheduling System<i class="fas fa-capsules"></i></h1>
+            
         <div class="appointments">
-            <h1>Appointments</h1>
+            <h1><i class="fas fa-capsules"></i>Appointments<i class="fas fa-capsules"></i></h1>
             {{message}}
             <h3>Upcoming Appointments</h3>
             <ul class="upcoming-appointments">
@@ -108,8 +129,8 @@
                 {% for appointment in upcoming_appointments %}
                 <li class="each">
                     {{ appointment['AppointmentDate'] }} - {{ appointment['AppointmentTime'] }} - {{ appointment['AppointmentLocation'] }} - {{ appointment['Doctor'] }} 
-                    <a class="button" href="/cancel-appointment/{{ appointment['AppointmentID'] }}">Cancel</a>
-                    <a class="button" href="/patient-list/{{ appointment['AppointmentID'] }}">Reschedule</a>
+                    <a class="button" href="/cancel-appointment/{{appointment['AppointmentID']}}">Cancel</a>
+                    <a class="button" href="/patient-list/{{ appointment['AppointmentID']}}">Reschedule</a>
                 </li>
                 {% endfor %}
             </ul>
@@ -124,7 +145,9 @@
             </ul>
         </div>
         <div class="action-buttons">
-            <button class="book-appointment">Book Appointment</button>
+            <a href="/patient-main">
+                <button> Back</button></a>
+            <a  class="button" href="/appointment-list" class="book-appointment">Book Appointment</a>
         </div>
    
     </div>

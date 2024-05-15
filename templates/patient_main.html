@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
     <title>User Dashboard</title>
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
-            background-color: #0b7dda;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
             margin: 0;
         }
 
@@ -22,7 +24,7 @@
 
 .dashboard-section {
     display: inline-block;
-    width: 225px; /* Set a fixed width for the sections */
+    width: 200px; /* Set a fixed width for the sections */
     height: 200px; /* Set a fixed height for the sections */
     margin-right: 20px; /* Adjust margin as needed */
     background-color: #cddff0;
@@ -32,7 +34,6 @@
     box-sizing: border-box;
     vertical-align: top;
 }
-
 
         /* Clearfix for footer */
         footer::after {
@@ -60,7 +61,9 @@
 <body>
     <div class="container">
         <header>
-            <h1 class="system-name">Appointment Scheduling System</h1>
+            <h1 >
+                <i class="fas fa-capsules"></i>Appointment Scheduling System<i class="fas fa-capsules"></i></h1>
+                
             <h2>Welcome to the Patients' Panel {{username}}</h2>
             <p>This is the main page of the patients' panel. You can navigate to different sections from here.</p>
         </header>
@@ -68,25 +71,23 @@
         <main>
             <section class="dashboard-section" id="appointments">
                 <a href='/patient-appointment' class="appointment-link">
-                    <h2>Appointments</h2>
+                    <h3><i class="fas fa-capsules"></i>Appointments<i class="fas fa-capsules"></i></h3>
                     <!-- Display appointment-related information and functionality here -->
                 </a>
             </section>
 
             <section class="dashboard-section" id="profile">
-                <a href="view_profile.html" class="view_profile"></a>
-                <h2>View Profile</h2>
+                <a href="/view_profile" class="view_profile">
+                <h3><i class="fas fa-user"></i>View Profile<i class="fas fa-user"></i></h3>
+
+            </a>
                 <!-- Display user-related information and functionality here -->
             </section>
 
-            <section class="dashboard-section" id="reminders">
-                <a href="reminders.html" class="reminders"></a>
-                <h2>Reminders</h2>
-            </section>
-
+        
             <section class="dashboard-section" id="preferences">
-                <a href="user_preferences.html" class="user_preferences"></a>
-                <h2>User Preferences</h2>
+                <a href='/user_preferences'class="user_preferences">
+                <h3><i class="fas fa-star"></i>Preferences<i class="fas fa-star"></i></h3></a>
                 <!-- Display things to do here-related information and functionality here -->
             </section>
         </main>

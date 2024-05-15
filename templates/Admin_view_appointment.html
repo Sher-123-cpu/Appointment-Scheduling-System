@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
     <title>Admin - View Patient Appointments</title>
     <style>
        body {
-    font-family: Arial, sans-serif;
-    background-color: #cddff0;
-    margin: 0;
-    padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='logo.png') }}");
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 160vh;
 }
 
 .container {
@@ -82,37 +88,37 @@ h1 {
 </head>
 <body>
     <div class="container">
-        <h1>Admin - View Patient Appointments</h1>
+        <h1><i class="fas fa-capsules"></i>Admin - View Patient Appointments<i class="fas fa-capsules"></i></h1>
 
         <main class="main">
             <h2>Manage Patient Appointment </h2>
             <div class="patient-details">
                 <div>
-                    <h4>Patient Name</h4>
+                    <h4>Patient Name<i class="fas fa-user"></i></h4>
                     <p>{{patientname}}</p>
                 </div>
                 <div>
-                    <h4>Email</h4>
+                    <h4>Email<i class="fas fa-at"></i></h4>
                     <p>{{ user_details['Email'] }}</p>
                 </div>
                 <div>
-                    <h4>Phone Number</h4>
+                    <h4>Phone Number<i class="fas fa-phone"></i></h4>
                     <p>{{ user_details['PhoneNumber'] }}</p>
                 </div>
                 <div>
-                    <h4>Appointment Date</h4>
+                    <h4>Appointment Date<i class="fas fa-calendar-check"></i></h4>
                     <p>{{ appointment_details['AppointmentDate'] }}</p>
                 </div>
                 <div>
-                    <h4>Appointment Location</h4>
+                    <h4>Appointment Location<i class="fas fa-map-marker-alt"></i></h4>
                     <p>{{ appointment_details['AppointmentLocation'] }}</p>
                 </div>
                 <div>
-                    <h4>Appointment Status</h4>
+                    <h4>Appointment Status<i class="fas fa-id-badge"></i></h4>
                     <p>{{ appointment_details['AppointmentStatus'] }}</p>
                 </div>
                 <div>
-                    <h4>Assigned Doctor</h4>
+                    <h4>Assigned Doctor<i class="fas fa-user-md"></i></h4>
                     <p>{{ appointment_details['Provider'] }}</p>
                 </div>
             </div>

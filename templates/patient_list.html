@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
     <title>Select New Appointment</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #cddff0;
-            margin: 0;
-            padding: 20px;
+       body {
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='logo.png') }}");
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
         }
 
         .system-name {
+            font-size: 24px;
             font-style: italic;
-            font-size: 20px;
-            position: absolute;
-            top: 10px;
-            left: 10px;
+            color: #333;
+            margin-top: 10px;
         }
+
+        .system-name img {
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+
+       
+      
 
         .container {
             max-width: 800px;
@@ -81,8 +96,9 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="system-name">Appointment Scheduling System</h1>
-        <h2>Select New Appointment</h2>
+        <h1 class="system-name"><img src="/static/logo.jpg" alt="Logo">
+            <i class="fas fa-capsules"></i>Appointment Scheduling System<i class="fas fa-capsules"></i></h1>
+             <h2><i class="fas fa-capsules"></i>Select New Appointment<i class="fas fa-capsules"></i></h2>
         <p>Choose your new appoinment time below.</p>
         <p>{{message}}</p>
       

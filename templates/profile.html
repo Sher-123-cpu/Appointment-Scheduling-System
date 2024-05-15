@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='logo.png') }}");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header i {
+            margin: 0 10px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        p {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        strong {
+            color: #444;
+        }
+
+        .back-button {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #1460c9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0b4ea2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-capsules"></i> Appointment Scheduling System <i class="fas fa-capsules"></i>
+        </div>
+        <section class="dashboard-section" id="profile">
+            <h2>User Profile</h2>
+            <div>
+                <h3>Patient Information</h3>
+                <p><strong><i class="fas fa-user"></i>Username:</strong> {{ user[1] }}</p>
+                <p><strong><i class="fas fa-id-badge"></i>Patient Id:</strong> {{ user[0] }}</p>
+                <p><strong><i class="fas fa-user"></i>First Name:</strong> {{ user[3] }}</p>
+                <p><strong><i class="fas fa-user"></i>Last Name:</strong> {{ user[4] }}</p>
+                <p><strong><i class="fas fa-mars"></i>Gender:</strong> {{ user_2[1] }}</p>
+                <p><strong><i class="fas fa-calendar-alt"></i>Date of Birth:</strong> {{ dib }}</p>
+                <p><strong><i class="fas fa-phone"></i>Phone Number:</strong> {{ user_2[3] }}</p>
+                <p><strong><i class="fas fa-at"></i>Email:</strong> {{ user_2[4] }}</p>
+            </div>
+            <a href="/patient-main" class="back-button">Back</a>
+        </section>
+    </div>
+</body>
+</html>

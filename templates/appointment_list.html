@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Appointment Page</title>
+    <title>Select New Appointment</title>
     <style>
-         
-         body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #cddff0;
             margin: 0;
@@ -88,57 +87,16 @@
             background-color: #095898; /* Darker green */
         }
 
-    
-
-        select {
-    width: 10%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    background-color: #fff;
-    margin-bottom: 10px;
-}
-        .filter-input {
-            margin-bottom: 10px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .view-button {
-            background-color: #0b7dda; /* Green */
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        /* Hover effect for the button */
-        .view-button:hover {
-            background-color: #095898; /* Darker green */
-        }
-
-        .add-appointment-button {
-            background-color: #15da0b;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;  
-            margin-left: 600px;
-            margin-bottom: 60px;
-        }
-
-        .add-appointment-button:hover {
-            background-color: #095898;
+        .auto_scheduling {
+        position: fixed;
+        top: 15%;
+        right: 20px; /* Adjust as needed */
+        transform: translateY(-50%);
+        background-color: #f0f0f0; /* Adjust background color as needed */
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow */
+        color:red;
         }
 
         select {
@@ -157,24 +115,30 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="system-name">Appointment Scheduling System</h1>
-        <h2>Admin Appointment Page</h2>
-        <p>This is the appointment page for an administrator.</p>
+        <div class="auto_scheduling">
+            <h2 class="urgent">Need Urgent Assistance </h2>
+                <h2>Or Would Like to AutoSchedule?</h2>
+            <a href="/auto_book">Click here</a>
+        </div>
+        <h2>Book Appointment</h2>
+        <p>Choose your appointment time below.</p>
         <p>{{message}}</p>
-      
-        <a href="/add-appointment" class="add-appointment-button">Add Appointment</a>
 
-        
+        <!-- Add filter inputs for each column -->
+
         <div>
             <label for="filter-type">Select Filter Type:</label>
             <select id="filter-type" onchange="clearFilterInput()">
                 <option value="date">Date</option>
                 <option value="time">Time</option>
                 <option value="location">Location</option>
+                <option value="doctor">Doctor</option>
             </select>
         </div>
 
@@ -183,16 +147,15 @@
             <input type="text" id="filter-input" class="filter-input" onkeyup="filterTable()">
         </div>
 
-        <!-- Table -->
+
         <table id="appointment-table">
             <thead>
                 <tr>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Location</th>
-                    <th>User ID</th>
-                    <th>Status</th>
-                    <th>Action</th> 
+                    <th>Doctor</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -202,12 +165,11 @@
                     <td>{{ appointment['AppointmentDate'] }}</td>
                     <td>{{ appointment['AppointmentTime'] }}</td>
                     <td>{{ appointment['AppointmentLocation'] }}</td>
-                    <td>{{ appointment['UserID'] }}</td>
-                    <td>{{ appointment['AppointmentStatus'] }}</td>
+                    <td>{{ appointment['Provider'] }}</td>
                     <td>
-                        <form action="/view-appointment" method="post"> <!-- Change action as needed -->
+                        <form action="/book" method="post">
                             <input type="hidden" name="appointment_id" value="{{ appointment['AppointmentID'] }}">
-                            <button class="view-button" type="submit">View</button>
+                            <button class="book-button" type="submit">Select</button>
                         </form>
                     </td>
                 </tr>

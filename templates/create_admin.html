@@ -3,36 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
     <title>Create Admin Account</title>
 </head>
 <body>
     <style>   
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e6e5e5;
-            margin: 0;
-            padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='logo.png') }}");
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 110vh;
+    }
+        
+        .container {
+        
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            background-color: hsl(209, 98%, 66%);
             align-items: center;
-            height: 100vh;
+            padding: 20px;
+        }
+        
+        .system-name {
+            font-size: 24px;
+            font-style: italic;
+            color: #333;
+            margin-top: 10px;
         }
 
-        .container {
+        .system-name img {
+            height: 80px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .create-form {
             width: 400px;
-            background-color: #cddff0;
+            background-color: #5198db;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-
+        
+        .create-form form {
+            display: flex; 
+            flex-direction: column;
+        }
+        
         .form-group {
             margin-bottom: 20px;
         }
-
+        
         .form-group label {
             font-weight: bold;
         }
+        
 
         input[type="text"],
         input[type="password"],
@@ -62,27 +91,31 @@
         }
     </style>
     <div class="container">
-        <h2>Create Admin Account</h2>
+        <h1 class="system-name">
+            <img src="/static/logo.jpg" alt="Logo">
+            Appointment Scheduling System
+        </h1>
+        <h1><i class="fa fa-capsules"></i> Admin Account<i class="fa fa-capsules"></i></h1>
         <p class="err">{{ error_message }}</p>
         <form action="/register-admin" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Username<i class="fas fa-user"></i></label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Password<i class="fas fa-key"></i></label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="form-group">
-                <label for="confirm-password">Confirm Password</label>
+                <label for="confirm-password">Confirm Password<i class="fas fa-lock"></i></label>
                 <input type="password" id="confirm-password" name="confirm_password" required>
             </div>
             <div class="form-group">
-                <label for="first-name">First Name</label>
+                <label for="first-name">First Name<i class="fas fa-id-badge"></i></label>
                 <input type="text" id="first-name" name="first_name" required>
             </div>
             <div class="form-group">
-                <label for="last-name">Last Name</label>
+                <label for="last-name">Last Name<i class="fas fa-id-badge"></i></label>
                 <input type="text" id="last-name" name="last_name" required>
             </div>
             <button type="submit">Create Admin Account</button>
